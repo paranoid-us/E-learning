@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EduVerse - E-learning Platform</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">🎓 EduVerse</div>
+    <ul class="nav-links">
+      <li><a href="#home" class="nav-link" onclick="navigateTo('home')">Home</a></li>
+      <li><a href="#courses" class="nav-link" onclick="navigateTo('courses')">Courses</a></li>
+      <li><a href="#progress" class="nav-link" onclick="navigateTo('progress')">Progress</a></li>
+      <li><a href="#dashboard" class="nav-link" onclick="navigateTo('dashboard')">Dashboard</a></li>
+      <li><a href="#auth" class="nav-link" id="authLink" onclick="navigateTo('auth')">Login / Signup</a></li>
+      <li><a href="#" class="nav-link hidden" id="logoutLink" onclick="logoutUser()">Logout</a></li>  
+    </ul>
+    <button onclick="toggleDarkMode()" class="btn toggle-mode">🌓</button>
+  </nav>
+  <section id="auth" class="page fade-in">
+    <div class ="auth-logo-wrapper">
+    <img src="studyimg.avif" class="auth-logo dark-only" />
+    <img src="studyimg.avif" class="auth-logo light-only" />
+    </div>
+    <h2 class="section-title">Welcome to EduVerse</h2>
+    <p>Boost your learning by signing up or logging in.</p>
+    <div class="auth-toggle">
+    </div>
+
+    <form id="loginForm" class="auth-form fade-in" autocomplete="off"> 
+      <input type="text" id="username" placeholder="Username" required autocomplete="off" />
+      <input type="password" id="password" placeholder="Password" required autocomplete="new-password"/>
+      <button type="submit" class="btn">Login</button>
+      <p class="link-switch">Don't have an account?
+        <button type="button" class="link-btn" onclick="toggleForm('signup')">Sign Up</button>
+      </p>  
+    </form>
+
+    <form id="signupForm" class="auth-form hidden fade-in" autocomplete="off">
+      <input type="text" id="newUsername" placeholder="New Username" required autocomplete="off" />
+      <input type="password" id="newPassword" placeholder="New Password" required autocomplete="new-password"/>
+      <button type="submit" class="btn">Sign Up</button>
+      <p class="link-switch">Already a user?
+        <button type="button" class="link-btn" onclick="toggleForm('login')">Login</button>
+      </p>
+    </form>
+  </section>
+
+  <section id="home" class="page">
+    <div class="hero">
+      <h1>Welcome to EduVerse</h1>
+      <p>Boost your skills with our curated e-learning courses.</p>
+      <a href="#courses" class="btn" onclick="navigateTo('courses')">Explore Courses</a>
+    </div>
+  </section>
+
+  <section id="courses" class="page hidden">
+    <h2 class="section-title">Available Courses</h2>
+    <div class="course-filters">
+      <input type="text" id="searchInput" placeholder="Search courses...">
+      <select id="categoryFilter">
+        <option value="All">All Categories</option>
+        <option value="Programming">Programming</option>
+        <option value="Design">Design</option>
+        <option value="Marketing">Marketing</option>
+      </select>
+      <select id="levelFilter">
+        <option value="All">All Levels</option>
+        <option value="Beginner">Beginner</option>
+        <option value="Intermediate">Intermediate</option>
+        <option value="Advanced">Advanced</option>
+      </select>
+    </div>
+    <div class="course-list" id="courseList"></div>
+  </section>
+
+  <section id="progress" class="page hidden">
+    <h2 id="progress-title"></h2>
+    <p id="progress-desc"></p>
+    <div class="video-section">
+      <iframe id="videoPlayer" allowfullscreen></iframe>
+    </div>
+    <div class="progress">
+      <div id="progressBar" class="progress-inner"></div>
+    </div>
+    <button class="btn">Continue Learning</button>
+  </section>
+
+  <section id="dashboard" class="page hidden">
+    <h2 class="section-title">User Dashboard</h2>
+    <div class="dashboard">
+      <img src="" id="avatar" class="avatar" alt="User Avatar" />
+      <input type="text" id="avatarInput" placeholder="Enter avatar seed..." />
+      <button class="btn" onclick="updateAvatar()">Update Avatar</button>
+      <h3 id="welcomeUser"></h3>
+
+      <h4>Edit Profile</h4>
+      <input type="text" id="editUsername" placeholder="New Username" />
+      <input type="password" id="editPassword" placeholder="New Password" />
+      <button class="btn" onclick="updateProfile(document.getElementById('editUsername').value, document.getElementById('editPassword').value)">Save Profile</button>
+
+      <h4>Enrolled Courses:</h4>
+      <ul id="enrolledCourses" class="enrolled-list"></ul>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 EduVerse. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

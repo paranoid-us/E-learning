@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>EduVerse - Courses</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="style.css" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+  <button class="toggle-mode" onclick="toggleDarkMode()">🌙 Toggle Mode</button>
+
+  <nav class="navbar">
+    <div class="logo">🎓 EduVerse</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="courses.html" class="active">Courses</a></li>
+      <li><a href="progress.html">Progress</a></li>
+      <li><a href="dashboard.html">Dashboard</a></li>
+    </ul>
+  </nav>
+
+  <section class="page">
+    <h2 class="section-title">Explore Courses</h2>
+
+    <div class="course-filters">
+      <input type="text" id="searchInput" placeholder="Search by title..." />
+      <select id="categoryFilter">
+        <option value="All">All Categories</option>
+        <option value="Programming">Programming</option>
+        <option value="Design">Design</option>
+        <option value="Marketing">Marketing</option>
+      </select>
+      <select id="levelFilter">
+        <option value="All">All Levels</option>
+        <option value="Beginner">Beginner</option>
+        <option value="Intermediate">Intermediate</option>
+        <option value="Advanced">Advanced</option>
+      </select>
+    </div>
+
+    <div class="course-list" id="courseList"></div>
+  </section>
+
+  <button id="backToTop" class="btn" style="position: fixed; bottom: 20px; right: 20px; display: none;">⬆ Back to Top</button>
+
+  <script src="script.js"></script>
+  <script>
+    // Scroll to top
+    const topBtn = document.getElementById("backToTop");
+    window.addEventListener("scroll", () => {
+      topBtn.style.display = window.scrollY > 300 ? "block" : "none";
+    });
+    topBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Login protection
+    window.addEventListener('DOMContentLoaded', () => {
+      const isLoggedIn = localStorage.getItem('loggedInUser');
+      if (!isLoggedIn) {
+        alert("Please login to view courses.");
+        window.location.href = "index.html"; // or redirect to main auth page
+      }
+
+      if (document.getElementById('searchInput')) {
+        document.getElementById('searchInput').addEventListener('input', loadCourses);
+        document.getElementById('categoryFilter').addEventListener('change', loadCourses);
+        document.getElementById('levelFilter').addEventListener('change', loadCourses);
+        loadCourses();
+      }
+    });
+  </script>
+</body>
+</html>
