@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EduVerse - E-learning Platform</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">🎓 EduVerse</div>
+    <ul class="nav-links">
+      <li><a href="index.html" class="nav-link active">Home</a></li>
+      <li><a href="about.html" class="nav-link ">About</a></li>
+      <li><a href="courses.html" class="nav-link">Courses</a></li>
+      <li><a href="progress.html" class="nav-link">Progress</a></li>
+      <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+      <li><a href="#" class="nav-link hidden" id="logoutLink" onclick="logoutUser()">Logout</a></li>
+    </ul>
+    <button onclick="toggleDarkMode()" class="btn toggle-mode">🌓</button>
+  </nav>
+  <section id="auth" class="page fade-in">
+    <div class ="auth-logo-wrapper">
+    <img src="studyimg.avif" class="auth-logo dark-only" />
+    <img src="studyimg.avif" class="auth-logo light-only" />
+    </div>
+    <h2 class="section-title">Welcome to EduVerse</h2>
+    <p>Boost your learning by signing up or logging in.</p>
+    <div class="auth-toggle">
+    </div>
+
+    <form id="loginForm" class="auth-form fade-in" autocomplete="off"> 
+      <input type="text" id="username" placeholder="Username" required autocomplete="off" />
+      <input type="password" id="password" placeholder="Password" required autocomplete="new-password"/>
+      <button type="submit" class="btn">Login</button>
+      <p class="link-switch">Don't have an account?
+        <button type="button" class="link-btn" onclick="toggleForm('signup')">Sign Up</button>
+      </p>  
+    </form>
+
+    <form id="signupForm" class="auth-form hidden fade-in" autocomplete="off">
+      <input type="text" id="newUsername" placeholder="New Username" required autocomplete="off" />
+      <input type="password" id="newPassword" placeholder="New Password" required autocomplete="new-password"/>
+      <button type="submit" class="btn">Sign Up</button>
+      <p class="link-switch">Already a user?
+        <button type="button" class="link-btn" onclick="toggleForm('login')">Login</button>
+      </p>
+    </form>
+  </section>
+
+  <section id="home" class="page">
+    <div class="hero">
+      <h1>Welcome to EduVerse</h1>
+      <p>Boost your skills with our curated e-learning courses.</p>
+      <a href="#courses" class="btn" onclick="navigateTo('courses')">Explore Courses</a>
+    </div>
+  </section>
+
+ 
+
+  <footer>
+    <p>&copy; 2025 EduVerse. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

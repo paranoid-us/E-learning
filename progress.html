@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EduVerse - Progress</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="script.js" defer></script>
+
+  <style>
+    .video-section iframe {
+      width: 100%;
+      max-width: 700px;
+      height: 400px;
+      border-radius: 12px;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
+      margin: 1rem auto;
+      display: block;
+    }
+
+    .lesson-tracker {
+      max-width: 700px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background-color: #ffe5e5;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .lesson-tracker ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .lesson-tracker li {
+      padding: 0.5rem;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .lesson-tracker .completed {
+      color: green;
+      font-weight: bold;
+    }
+
+    .lesson-tracker .current {
+      color: #e63946;
+    }
+
+    .progress {
+      background-color: #eee;
+      border-radius: 10px;
+      margin: 1rem auto;
+      height: 16px;
+      width: 80%;
+    }
+
+    .progress-inner {
+      background-color: #3b82f6;
+      height: 100%;
+      width: 0;
+      border-radius: 10px;
+      transition: width 0.5s ease;
+    }
+
+    #progressChart {
+      max-width: 600px;
+      margin: 2rem auto;
+      background: #fff;
+      border-radius: 12px;
+      padding: 1rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">🎓 EduVerse</div>
+    <ul class="nav-links">
+      <li><a href="about.html" class="nav-link ">About</a></li>
+      <li><a href="courses.html" class="nav-link">Courses</a></li>
+      <li><a href="progress.html" class="nav-link active">Progress</a></li>
+      <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+      <li><a href="#" class="nav-link hidden" id="logoutLink" onclick="logoutUser()">Logout</a></li>
+    </ul>
+    <button onclick="toggleDarkMode()" class="btn toggle-mode">🌓</button>
+  </nav>
+
+  <section class="page">
+    <h2 class="section-title">Your Progress</h2>
+    <p style="text-align: center;">Track your progress and continue where you left off.</p>
+
+    <div class="video-section">
+      <iframe id="videoPlayer" allowfullscreen></iframe>
+    </div>
+
+    <div class="lesson-tracker">
+      <h3>Modules Completed: <span id="progressCount">0</span>/<span id="totalModules">0</span></h3>
+      <ul id="lessonList" class="enrolled-list"></ul>
+    </div>
+
+    <div class="progress">
+      <div id="progressBar" class="progress-inner"></div>
+    </div>
+
+    <div id="progressChart">
+      <canvas id="progressCanvas"></canvas>
+    </div>
+
+    <button class="btn" onclick="continueLearning()">Continue Learning</button>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 EduVerse. All rights reserved.</p>
+  </footer>
+
+  <script>
+    
+    window.addEventListener("DOMContentLoaded", () => {
+       const user = localStorage.getItem("loggedInUser");
+       if (!user) {
+         window.location.href = "index.html"; // redirect to login page
+      }
+    });
+
+
+    const lessons = [
+      { title: "Introduction to HTML", video: "https://www.youtube.com/embed/pQN-pnXPaVg" },
+      { title: "CSS Basics", video: "https://www.youtube.com/embed/1Rs2ND1ryYc" },
+      { title: "JavaScript Essentials", video: "https://www.youtube.com/embed/W6NZfCO5SIk" }
+    ];
+
+    let currentIndex = parseInt(localStorage.getItem("currentLessonIndex")) || 0;
+    let chart;
+
+    function loadProgress() {
+      const list = document.getElementById("lessonList");
+      const progressCount = document.getElementById("progressCount");
+      const totalModules = document.getElementById("totalModules");
+      const progressBar = document.getElementById("progressBar");
+      const player = document.getElementById("videoPlayer");
+
+      list.innerHTML = "";
+      totalModules.textContent = lessons.length;
+      progressCount.textContent = currentIndex;
+
+      lessons.forEach((lesson, index) => {
+        const li = document.createElement("li");
+        li.textContent = lesson.title;
+        li.className = index < currentIndex ? "completed" : (index === currentIndex ? "current" : "");
+        list.appendChild(li);
+      });
+
+      const percent = (currentIndex / lessons.length) * 100;
+      progressBar.style.width = percent + "%";
+
+      if (lessons[currentIndex]) {
+        player.src = lessons[currentIndex].video;
+      } else {
+        player.src = "";
+      }
+
+      updateChart();
+    }
+
+    function continueLearning() {
+      if (currentIndex < lessons.length) {
+        currentIndex++;
+        localStorage.setItem("currentLessonIndex", currentIndex);
+        loadProgress();
+      } else {
+        alert("🎉 You have completed all modules!");
+      }
+    }
+
+    function updateChart() {
+      const ctx = document.getElementById("progressCanvas").getContext("2d");
+      const completed = currentIndex;
+      const remaining = lessons.length - currentIndex;
+
+      if (chart) chart.destroy(); // remove old chart
+
+      chart = new Chart(ctx, {
+        type: "doughnut",
+        data: {
+          labels: ["Completed", "Remaining"],
+          datasets: [{
+            label: "Course Progress",
+            data: [completed, remaining],
+            backgroundColor: ["#3b82f6", "#e5e7eb"],
+            borderWidth: 0
+          }]
+        },
+        options: {
+          cutout: "65%",
+          plugins: {
+            legend: {
+              display: true,
+              position: "bottom"
+            }
+          }
+        }
+      });
+    }
+
+    // Load on page
+    loadProgress();
+  </script>
+</body>
+</html>

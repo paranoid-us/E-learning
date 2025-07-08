@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EduVerse - Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="script.js"></script>
+  <script>
+  window.addEventListener("DOMContentLoaded", () => {
+    const user = localStorage.getItem("loggedInUser");
+    if (!user) {
+      window.location.href = "index.html"; 
+    }
+  });
+</script>
+</script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f4f9;
+    }
+    .dashboard {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      padding: 2rem;
+    }
+    .profile-section, .stats-section, .progress-graph, .suggestions-section, .course-section, .settings-section {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      flex: 1 1 300px;
+    }
+    .avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 3px solid #ce8baac2;
+      object-fit: cover;
+      margin-bottom: 1rem;
+    }
+    
+    .stats li {
+      margin: 0.3rem 0;
+    }
+    .enrolled-list li {
+      margin: 0.2rem 0;
+    }
+    @media (max-width: 768px) {
+      .dashboard {
+        flex-direction: column;
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">🎓 EduVerse</div>
+    <ul class="nav-links">
+      <li><a href="about.html" class="nav-link ">About</a></li>
+      <li><a href="courses.html" class="nav-link">Courses</a></li>
+      <li><a href="progress.html" class="nav-link ">Progress</a></li>
+      <li><a href="dashboard.html" class="nav-link active">Dashboard</a></li>
+      <li><a href="#" class="nav-link hidden" id="logoutLink" onclick="logoutUser()">Logout</a></li>
+    </ul>
+   
+  </nav>
+
+  <section class="page">
+    <h2 class="section-title" style="text-align:center;">User Dashboard</h2>
+    <div class="dashboard">
+      
+      <div class="profile-section">
+        <img src="" id="avatar" class="avatar" alt="User Avatar" />
+        <input type="text" id="avatarInput" placeholder="Enter avatar ..." />
+        <button class="btn" onclick="updateAvatar()">Update Avatar</button>
+
+        <h3 id="welcomeUser">Hello, User</h3>
+
+        <h4>Edit Profile</h4>
+        <input type="text" id="editUsername" placeholder="New Username" />
+        <input type="password" id="editPassword" placeholder="New Password" />
+        <button class="btn" onclick="updateProfile(document.getElementById('editUsername').value, document.getElementById('editPassword').value)">Save Profile</button>
+
+        <div class="profile-bio">
+          <h4>About You</h4>
+          <textarea id="userBio" placeholder="Write something about yourself..." rows="4"></textarea>
+          <button class="btn">Save Bio</button>
+        </div>
+      </div>
+
+      <div class="stats-section">
+        <h4>Learning Stats</h4>
+        <ul class="stats">
+          <li><strong>Courses Enrolled:</strong> <span id="statCourses">5</span></li>
+          <li><strong>Courses Completed:</strong> <span id="statCompleted">2</span></li>
+          <li><strong>Hours Studied:</strong> <span id="statHours">18</span></li>
+        </ul>
+      </div>
+
+      <div class="progress-graph">
+        <h4>Weekly Progress</h4>
+        <canvas id="progressChart" width="100%" height="200"></canvas>
+      </div>
+
+      <div class="suggestions-section">
+        <h4>Suggested Courses</h4>
+        <ul class="suggested-courses">
+          <li>📘 Advanced React - Continue your journey</li>
+          <li>🎨 UI/UX Design Principles - Enhance your design skills</li>
+          <li>📊 Data Analytics for Beginners - Learn to interpret data</li>
+        </ul>
+      </div>
+
+      <div class="course-section">
+        <h4>Enrolled Courses</h4>
+        <ul id="enrolledCourses" class="enrolled-list">
+          <li>✔ HTML Basics</li>
+          <li>✔ CSS Flexbox</li>
+          <li>✔ JavaScript Fundamentals</li>
+          <li>⏳ UI/UX Design</li>
+        </ul>
+      </div>
+
+      <div class="settings-section">
+        <h4>Settings</h4>
+        <label><input type="checkbox" onchange="toggleDarkMode()"> Enable Dark Mode</label><br />
+        
+      </div>
+
+    </div>
+  </section>
+
+  <script>
+   
+    const ctx = document.getElementById('progressChart').getContext('2d');
+    const progressChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        datasets: [{
+          label: 'Hours Studied',
+          data: [1, 2, 1.5, 3, 2, 4, 2.5],
+          backgroundColor: '#ce8baac2',
+          borderColor: '#a2f5b4c2',
+          borderWidth: 2,
+          fill: true,
+          tension: 0.4
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Hours'
+            }
+          }
+        }
+      }
+    });
+
+    
+    function updateAvatar() {
+      const seed = document.getElementById("avatarInput").value || "user";
+      const avatarUrl = `https://avatars.dicebear.com/api/initials/${encodeURIComponent(seed)}.svg`;
+      document.getElementById("avatar").src = avatarUrl;
+    }
+
+    function updateProfile(username, password) {
+      alert(`Username updated to: ${username}`);
+    }
+
+    
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark-mode");
+    }
+  </script>
+</body>
+</html>
