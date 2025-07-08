@@ -12,7 +12,7 @@
 
 *MENTOR*: NEELA SANTOSH
 
-# **DESCRIPTION OF AN E-LEARNING** 
+# **DESCRIPTION OF AN E-LEARNING PLATFORM UI** 
 
 EduVerse – Your Personal Gateway to Smarter Learning
 In an increasingly fast-evolving world, conventional education too frequently falls short of meeting the challenges of contemporary learners. That's where EduVerse comes in — a revolutionary, one-stop e-learning system that aims to bring education within reach, tailor-made, and highly empowering.
