@@ -55,7 +55,7 @@ EduVerse is built to be scalable. New courses can be easily inserted, user analy
 Final Thoughts
 In summary, EduVerse is more than a coding project — it's a meaningful, user-centric educational tool that combines technology with purpose. It represents what education can be: flexible, fun, personalized, and impactful. Whether you’re a developer building the platform or a learner using it, EduVerse brings the joy of self-paced learning to life.
 
-##OUTPUT
+# OUTPUT
 
 <img width="1331" height="665" alt="Image" src="https://github.com/user-attachments/assets/bb3669a3-255f-4182-8683-837457d839c5" />
 
