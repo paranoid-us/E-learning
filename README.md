@@ -54,3 +54,21 @@ EduVerse is built to be scalable. New courses can be easily inserted, user analy
 
 Final Thoughts
 In summary, EduVerse is more than a coding project — it's a meaningful, user-centric educational tool that combines technology with purpose. It represents what education can be: flexible, fun, personalized, and impactful. Whether you’re a developer building the platform or a learner using it, EduVerse brings the joy of self-paced learning to life.
+
+##OUTPUT
+
+<img width="1331" height="665" alt="Image" src="https://github.com/user-attachments/assets/bb3669a3-255f-4182-8683-837457d839c5" />
+
+<img width="1338" height="682" alt="Image" src="https://github.com/user-attachments/assets/95cf2e20-a049-4c6e-b5f3-85b30584297d" />
+
+<img width="1337" height="676" alt="Image" src="https://github.com/user-attachments/assets/b79a1f60-959d-476a-83d9-3b7a8bb1f4ab" />
+
+<img width="1335" height="682" alt="Image" src="https://github.com/user-attachments/assets/828cb562-7343-44a9-84e7-10ac4c05e49f" />
+
+<img width="1332" height="676" alt="Image" src="https://github.com/user-attachments/assets/9ce110c6-2df7-4b8a-94c6-3225ae234e98" />
+
+<img width="1335" height="679" alt="Image" src="https://github.com/user-attachments/assets/be948bac-6313-4493-9df7-c7919bb29384" />
+
+<img width="1330" height="222" alt="Image" src="https://github.com/user-attachments/assets/cfa2a1ae-9f7d-41d7-9410-f4181770aabc" />
+
+
