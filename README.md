@@ -46,10 +46,10 @@ EduVerse isn't just about learning — it's about preparing for tomorrow. Whethe
 
 Our platform emulates the design of contemporary software systems as well. It exposes students to concepts such as client-side routing, localStorage control, and responsive UI — all useful for future developers who aim to create similar systems. 
 
-8. Privacy-First, Offline-Friendly
+1. Privacy-First, Offline-Friendly
 One of the advantages of EduVerse is simplicity and privacy. All information (such as user login and course registration) is cached in the user's browser using localStorage, with an emphasis on privacy and autonomy. You don't require a server to run EduVerse — it is entirely client-side, which makes it perfect for school projects, demos, or even individual upskilling platforms.
 
-9. Built to Evolve
+2. Built to Evolve
 EduVerse is built to be scalable. New courses can be easily inserted, user analytics can be included later on, and the interface can be extended with live chat, quizzes, or certification badges. The project is modular, tidy, and poised for growth. 
 
 Final Thoughts
